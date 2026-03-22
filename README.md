@@ -32,7 +32,8 @@ To ensure end-to-end data integrity, the framework implements a dynamic capture 
 * `src/main/java/pages`: Object Repository (LoginPage, DashboardPage, PIM).
 * `src/main/java/genericUtilities`: Reusable PropertyFile and WebDriver utilities.
 * `src/test/java/demo`: Functional Test Scripts (`AddEmployeeTest`).
-
+# 📊 [Click Here to View LIVE Automation Report](https://katty95.github.io/Advanced-Selenium-Web-Framework/AdvanceReport/Report_Sun_Mar_22_12_09_33_IST_2026.html)
+---
 ## ⚙️ How to Run
 1. Clone the repository.
 2. Update `config.properties` with your OrangeHRM credentials.
