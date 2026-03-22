@@ -1,0 +1,9 @@
+/target/
+/.settings/
+/.classpath/
+/.project/
+/test-output/
+*.log
+*.war
+.idea/
+src/test/resources/config.properties
