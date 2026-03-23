@@ -21,7 +21,7 @@ public class BaseTest {
 	public Propertiesfileutility pUtil=new Propertiesfileutility();
 	 
 	
-	@BeforeMethod
+	@BeforeMethod (groups = {"smoke", "regression"})
 public void setup() throws Throwable {
 		baseUrl= pUtil.toReadDataFrompropertiesfile("url");
 		// 1. ChromeOptions ka object banayein
