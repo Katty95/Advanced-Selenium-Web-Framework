@@ -44,7 +44,7 @@ public class TestOrangeHRM extends BaseTest {
 
 		LoginPage lP = new LoginPage(driver);
 		String UN = pUtil.toReadDataFrompropertiesfile("username");
-		String PW = pUtil.toReadDataFrompropertiesfile("password");
+		String PW = pUtil.toReadDataFrompropertiesfile("wrongpassword");
 		lP.Login(UN,PW);
 		lP.getLoginBtn().click();
 		String message_expected = "Invalid credentials";
