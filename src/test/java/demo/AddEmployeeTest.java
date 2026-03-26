@@ -1,6 +1,8 @@
 package demo;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -92,7 +94,12 @@ public class AddEmployeeTest extends BaseTest {
 		wait.until(ExpectedConditions.elementToBeClickable(pm.getCheckBox())).click();
 
 		pm.getTrash().click();
-		wait.until(ExpectedConditions.elementToBeClickable(pm.getYesDelete())).click();
+		try {
+			wait.until(ExpectedConditions.elementToBeClickable(pm.getYesDelete())).click();
+		} catch (StaleElementReferenceException  e) {
+			driver.findElement(By.xpath("//button[normalize-space()='Yes, Delete']")).click();
+		}
+		
 		wait.until(ExpectedConditions.visibilityOf(pm.getNoRecord()));
 		boolean noRecord = pm.getNoRecord().getText().contains("No Records Found");
 		Assert.assertTrue(noRecord, "Verification Failed: 'No Records Found' message NOT found!");
