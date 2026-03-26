@@ -90,8 +90,13 @@ public class AddEmployeeTest extends BaseTest {
 		pm.getSearch().click();
 
 		System.out.println("Searching for ID to delete:" + captureId);
+		try {
+			wait.until(ExpectedConditions.elementToBeClickable(pm.getCheckBox())).click();
+		} catch (StaleElementReferenceException e) {
+			driver.findElement(By.xpath("//div[@class='oxd-table-card-cell-checkbox']//span")).click();
+		}
 
-		wait.until(ExpectedConditions.elementToBeClickable(pm.getCheckBox())).click();
+		
 
 		pm.getTrash().click();
 		try {
