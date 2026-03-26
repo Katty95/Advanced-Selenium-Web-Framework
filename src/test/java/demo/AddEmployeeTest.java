@@ -27,7 +27,7 @@ public class AddEmployeeTest extends BaseTest {
 		};
 	}
 
-	@Test(priority = 1, dataProvider = "employeeData", groups = "Regression")
+	@Test(priority = 1, dataProvider = "employeeData", groups = "regression")
 	public void verifyAddEmployee(String fName, String lName, String id) throws Throwable {
 		String UN = pUtil.toReadDataFrompropertiesfile("username");
 		String PW = pUtil.toReadDataFrompropertiesfile("password");
@@ -64,7 +64,7 @@ public class AddEmployeeTest extends BaseTest {
 
 	}
 
-	@Test(priority = 2,groups = "Regression", dependsOnMethods = "verifyAddEmployee")
+	@Test(priority = 2,groups = "regression", dependsOnMethods = "verifyAddEmployee")
 	public void deleteEmployee() throws Throwable {
 		// 1. Pehle check karo ID null toh nahi
 		if (captureId == null || captureId.isEmpty()) {
