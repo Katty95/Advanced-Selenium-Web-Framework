@@ -49,6 +49,8 @@ public class PIM {
 
 	@FindBy(xpath = "//button[normalize-space()='Search']")
 	private WebElement search;
+	
+	
 
 	@FindAll({
 			@FindBy(xpath = "//div[@class='oxd-table-card-cell-checkbox']//span[contains(@class, 'oxd-checkbox-input')]"),
@@ -63,8 +65,28 @@ public class PIM {
 
 	@FindBy(xpath = "//button[normalize-space()='Yes, Delete']")
 	private WebElement yesDelete;
+	
 	@FindBy(xpath = "//span[normalize-space()='No Records Found']")
 	private WebElement noRecord;
+	
+	@FindBy(xpath="//span[text()='(1) Record Found']")
+	private WebElement recordFound;
+	
+	@FindBy(xpath = "//label[text()='Employee Name']/parent::div/following-sibling::div//input")
+	 private WebElement empName;
+	
+
+	public WebElement getGeneratedEmployeeidDetails() {
+		return generatedEmployeeidDetails;
+	}
+
+	public WebElement getEmpName() {
+		return empName;
+	}
+
+	public WebElement getRecordFound() {
+		return recordFound;
+	}
 
 	public WebElement getNoRecord() {
 		return noRecord;
@@ -82,10 +104,6 @@ public class PIM {
 		return checkBox;
 	}
 
-	public WebElement getGetAddEmplyoee() {
-		return getAddEmplyoee;
-	}
-
 	public WebElement getSearch() {
 		return search;
 	}
@@ -98,9 +116,6 @@ public class PIM {
 		return toastMessage;
 	}
 
-	/*
-	 * public WebElement getGetAddEmplyoee() { return getAddEmplyoee; }
-	 */
 
 	public WebElement getSave() {
 		return save;
@@ -136,5 +151,7 @@ public class PIM {
 
 		return getEmployeeidDetails().getAttribute("value");
 	}
-
+ public  String GeneratedEmployeeName() {
+	 return getFirstName().getAttribute("value");
+ }
 }

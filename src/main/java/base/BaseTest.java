@@ -55,7 +55,7 @@ public void setup() throws Throwable {
 //!= → not equal to driver null ke barabar nahi hai
 	
 		if (driver != null) {
-			Thread.sleep(5000);// wait for 5 second before quit
+			//Thread.sleep(5000);// wait for 5 second before quit
 		
 		driver.quit();
 	}
