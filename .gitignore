@@ -7,3 +7,4 @@
 *.war
 .idea/
 src/test/resources/config.properties
+AdvanceReport/
