@@ -93,15 +93,21 @@ public class AddEmployeeTest extends BaseTest {
 		pm.getSearch().click();
 
 		System.out.println("Searching for ID to delete:" + id);
+		
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='oxd-table-body']")));
 		try {
 			wait.until(ExpectedConditions.elementToBeClickable(pm.getCheckBox())).click();
 		} catch (StaleElementReferenceException e) {
 			driver.findElement(By.xpath("//div[@class='oxd-table-card-cell-checkbox']//span")).click();
 		}
 
-		
+		try {
+			wait.until(ExpectedConditions.elementToBeClickable(pm.getTrash())).click();
+		} catch (Exception e) {
+			driver.findElement(By.xpath("//button[contains(@class,'oxd-icon-button')]//i[contains(@class,'bi-trash')]")).click();
+		}
 
-		pm.getTrash().click();
+		//pm.getTrash().click();
 		try {
 			wait.until(ExpectedConditions.elementToBeClickable(pm.getYesDelete())).click();
 		} catch (StaleElementReferenceException  e) {
@@ -111,12 +117,27 @@ public class AddEmployeeTest extends BaseTest {
 		try {
 			wait.until(ExpectedConditions.visibilityOf(pm.getNoRecord()));
 		} catch (StaleElementReferenceException  e ) {
-			wait.until(ExpectedConditions.textToBePresentInElementValue(By.xpath("//span[normalize-space()='No Records Found']"),"No Records Found " ));
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//span[normalize-space()='No Records Found']"),"No Records Found " ));
 		}
-		WebElement noRecordElement = wait.until(ExpectedConditions.visibilityOf(pm.getNoRecord()));
-		boolean noRecord = noRecordElement.getText().contains("No Records Found");
-		Assert.assertTrue(noRecord, "Verification Failed: 'No Records Found' message NOT found!");
-		System.out.println("Verification passed:''No Records Found' message found'");
+		
+		// Verification Block
+		String actualText = "";
+		try {
+		    // 1. Ek chota sa buffer wait (2 seconds) taaki DOM settle ho jaye
+		    Thread.sleep(2000); 
+		    
+		    // 2. Fresh element dhoondo using 'contains' - ye zyada stable hai
+		    WebElement resultMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(
+		                            By.xpath("//span[contains(.,'Records Found')]")));
+		    actualText = resultMsg.getText();
+		    
+		} catch (Exception e) {
+		    // 3. Agar fail ho, toh poore table ka text nikal kar check karo (Backup Plan)
+		    actualText = driver.findElement(By.xpath("//div[@class='oxd-table-body']")).getText();
+		}
+
+		System.out.println("Actual Text found: " + actualText);
+		Assert.assertTrue(actualText.contains("No Records Found"), "Verification Failed! Record delete nahi hua.");
 
 		dp.getUserDropdwon().click();
 	    dp.getLogOut().click();

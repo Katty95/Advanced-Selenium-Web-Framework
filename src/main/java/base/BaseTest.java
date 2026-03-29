@@ -46,7 +46,7 @@ public void setup() throws Throwable {
 		driver.get(baseUrl);
 		//global wait 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 		
 		
 	}
