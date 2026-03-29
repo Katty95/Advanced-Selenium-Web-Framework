@@ -111,13 +111,15 @@ public class AddEmployeeTest extends BaseTest {
 		try {
 			wait.until(ExpectedConditions.visibilityOf(pm.getNoRecord()));
 		} catch (StaleElementReferenceException  e ) {
-			driver.findElement(By.xpath("//span[normalize-space()='No Records Found']"));
+			wait.until(ExpectedConditions.textToBePresentInElementValue(By.xpath("//span[normalize-space()='No Records Found']"),"No Records Found " ));
 		}
-		
-		boolean noRecord = pm.getNoRecord().getText().contains("No Records Found");
+		WebElement noRecordElement = wait.until(ExpectedConditions.visibilityOf(pm.getNoRecord()));
+		boolean noRecord = noRecordElement.getText().contains("No Records Found");
 		Assert.assertTrue(noRecord, "Verification Failed: 'No Records Found' message NOT found!");
 		System.out.println("Verification passed:''No Records Found' message found'");
 
+		dp.getUserDropdwon().click();
+	    dp.getLogOut().click();
 	}
 
 	@Test(priority = 2 ,dataProvider = "employeeData", groups = "regression",dependsOnMethods = "verifyAddEmployee")
@@ -138,11 +140,14 @@ public class AddEmployeeTest extends BaseTest {
 			
 			PIM pi=new PIM(driver);
 			pi.getEmpName().sendKeys(fName);
+			Thread.sleep(2000);
 			pi.getEmpName().sendKeys(Keys.ARROW_DOWN);
 			pi.getEmpName().sendKeys(Keys.ENTER);
 			pi.getSearch().click();
 			String employeeMatch = wait.until(ExpectedConditions.visibilityOf(pi.getRecordFound())).getText();
 			Assert.assertEquals(employeeMatch, "(1) Record Found");
+			dp.getUserDropdwon().click();
+		    dp.getLogOut().click();
 			
 		}
 	}
