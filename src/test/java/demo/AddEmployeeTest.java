@@ -14,6 +14,7 @@ import base.BaseTest;
 import pages.DashboardPage;
 import pages.LoginPage;
 import pages.PIM;
+import genricUtilites.Excelfileutility;
 
 @Listeners(listenerUtility.ListenerImplementation.class)
 public class AddEmployeeTest extends BaseTest {
@@ -24,10 +25,9 @@ public class AddEmployeeTest extends BaseTest {
 
 	@DataProvider(name = "employeeData")
 	public Object[][] getEmpdata() {
-		return new Object[][] { { "Ankit", "Kumar", "869551" }, { "Abhijeet", "Kumar", "8996514" },
-				{ "Piku", "chiku", "1335619" }
-
-		};
+		Excelfileutility excel = new Excelfileutility();
+		Object[][] data = excel.getData("Employee");
+		return data;
 	}
 
 	@Test(priority = 1, dataProvider = "employeeData", groups = "regression")
